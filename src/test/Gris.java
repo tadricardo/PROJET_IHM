@@ -10,7 +10,7 @@ public class Gris {
 
 	Gris(int num){
 		for (int i=1; i<=num; i++) {
-				listGris.add(Color.rgb(255/num, 255/num, 255/num, .99));
+				listGris.add(Color.rgb(255/num, 255/num, 255/num));
 		}
 	}
 }

@@ -4,37 +4,36 @@ import javafx.scene.paint.Color;
 
 public class CouleurAssocie {
 
-	private int bleu;
-	private int vert;
-	private int rouge;
-	private int reste=255;
+	private double bleu=0;
+	private double vert=0;
+	private double rouge=0;
+	private double reste;
 	
 	public Color couleur;
 
-	CouleurAssocie(Color c){
-		reste=(int) (c.getBlue()*255);
-		bleu=(int) (reste/0.59);
-		reste=(int) (reste/(1-0.59));
-		
-		if (bleu>=255) {
-			reste+=(bleu-255)*0.59;
-		}
-		
-		rouge=(int) (reste/0.3);
-		reste=(int) (reste/(1-0.3));
-		
-		if (rouge>=255) {
-			reste+=(rouge-255)*0.3;
-		}
-		
-		bleu=(int) (reste/0.11);
-		reste=(int) (reste/(1-0.11));
-		
-		if (bleu>=255) {
-			reste+=(bleu-255)*0.11;
-		}
-		
-		couleur=new Color(rouge, vert, bleu, .99);
-		
+	CouleurAssocie(int a){
+		reste=a/255.0;
+			
+		bleu=reste/0.11; //on rempli bleu	
+		reste=0;
+		if (bleu>=1.0) { //si bleu est trop plein ,on rempli vert	
+			reste+=(bleu-1.0)*0.11;
+			bleu=1.0;
+			
+			vert=reste/0.59;
+			reste=0;
+			if (vert>=1.0) { //si vert est trop plein ,on rempli rouge
+				reste+=(vert-1.0)*0.59;
+				vert=1.0;
+			}
+			
+			rouge=reste/0.3;
+			reste=0;
+			if (rouge>=1.0) {
+				reste+=(rouge-1.0)*0.3;
+				rouge=1.0;
+			}		
+		}		
+		couleur=new Color(rouge, vert, bleu, 1);		
 	}
 }
