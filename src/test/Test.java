@@ -1,6 +1,7 @@
 package test;
 
 import javafx.application.Application;
+
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -22,7 +23,7 @@ public class Test extends Application {
 		vbox.setPadding(new Insets(1));
 
 
-		int nivGris=250;//chiffre a modifier pour cr�er de nouveaux gris
+		int nivGris=200;//chiffre a modifier pour cr�er de nouveaux gris
 
 		Rectangle r1 = new Rectangle(100, 100);
 		r1.setFill( new Color( nivGris/255. ,nivGris/255. , nivGris/255. , 1. ));
