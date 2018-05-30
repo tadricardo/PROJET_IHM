@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Test extends Application {
-	@Override
+	
 	public void start(Stage primaryStage) {
 		Group root = new Group();
 		Scene scene = new Scene(root, 300, 250);
@@ -22,7 +22,7 @@ public class Test extends Application {
 		vbox.setPadding(new Insets(1));
 
 
-		int nivGris=250;//chiffre a modifier pour créer de nouveaux gris
+		int nivGris=250;//chiffre a modifier pour crï¿½er de nouveaux gris
 
 		Rectangle r1 = new Rectangle(100, 100);
 		r1.setFill( new Color( nivGris/255. ,nivGris/255. , nivGris/255. , 1. ));

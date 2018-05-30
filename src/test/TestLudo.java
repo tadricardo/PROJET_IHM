@@ -1,7 +1,6 @@
 package test;
 
 import java.awt.event.MouseWheelEvent;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,7 +43,7 @@ public class TestLudo extends Application {
 
 	}
 
-	@Override
+
 	public void start(Stage stage) throws Exception {
 
 		label = new Label("10");
