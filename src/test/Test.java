@@ -46,18 +46,6 @@ public class Test extends Application {
 
 		}
 
-		
-
-
-		//HBox.setMargin(r1, new Insets(2, 2, 2, 2));
-
-
-
-
-
-		//root.getChildren().add(vbox);
-
-
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
