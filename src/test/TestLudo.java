@@ -74,6 +74,8 @@ public class TestLudo extends Application {
 		HBox hbox = new HBox(10);
 		hbox.getChildren().addAll(bmoins, bplus);
 		vbox.getChildren().addAll(label, hbox);
+		vbox.setLayoutX(755);
+		vbox.setLayoutY(10);
 		gridPane.setHgap(18);
 		gridPane.setLayoutY(140);
 		gridPane.setLayoutX(20);

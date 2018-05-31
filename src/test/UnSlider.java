@@ -42,7 +42,7 @@ private static final int compteur2 = 10;
 		donnees.setPadding(new Insets(0, 0, 16, 45));
 		ModuleCouleur mc = new ModuleCouleur( ( (int)(235)/compteur2 ) * compteur);
 		this.rectangle.getChildren().addAll(mc.r1,mc.r2);
-		this.donnees.getChildren().addAll(mc.text,mc.text2);
+		this.donnees.getChildren().addAll(mc.text2,mc.text);
 		this.contenair.getChildren().addAll(rectangle,donnees,red,green,blue);
 		compteur++;
 		
