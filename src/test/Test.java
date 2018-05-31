@@ -24,23 +24,23 @@ public class Test extends Application {
 		VBox vbox10 = new VBox(5);
 
 		
-		Module m1= null;
-		Module m2 = null;
-		Module m3 = null;
-		Module m4= null;
-		Module m5= null;
-		Module m6= null;
-		Module m7= null;
-		Module m8= null;
-		Module m9= null;
-		Module m10= null;
+		ModuleCouleur m1= null;
+		ModuleCouleur m2 = null;
+		ModuleCouleur m3 = null;
+		ModuleCouleur m4= null;
+		ModuleCouleur m5= null;
+		ModuleCouleur m6= null;
+		ModuleCouleur m7= null;
+		ModuleCouleur m8= null;
+		ModuleCouleur m9= null;
+		ModuleCouleur m10= null;
 		
-		Module[] mod= {m1,m2,m3,m4,m5,m6,m7,m8,m9,m10};
+		ModuleCouleur[] mod= {m1,m2,m3,m4,m5,m6,m7,m8,m9,m10};
 
 		VBox[] box= {vbox1,vbox2,vbox3,vbox4,vbox5,vbox6,vbox7,vbox8,vbox9,vbox10};
 		int num=10;
 		for(int i=1 ; i<=num ; i++) {
-			mod[i-1]=new Module( ( (int)(235)/num ) *i );
+			mod[i-1]=new ModuleCouleur( ( (int)(235)/num ) *i );
 			box[i-1].getChildren().addAll(mod[i-1].r1, mod[i-1].r2, mod[i-1].text, mod[i-1].text2);
 			root.addColumn(i-1, box[i-1]);
 

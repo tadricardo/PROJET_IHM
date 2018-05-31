@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class Module {
+public class ModuleCouleur {
 	
 	Rectangle r1;
 	Rectangle r2;
@@ -12,7 +12,7 @@ public class Module {
 	Text text;
 	Text text2;
 	
-	Module(int nivGris){
+	ModuleCouleur(int nivGris){
 		r1 = new Rectangle(100, 100);
 		r1.setFill( new Color( nivGris/255. ,nivGris/255. , nivGris/255. , 1. ));
 		r2 = new Rectangle(100, 100);
