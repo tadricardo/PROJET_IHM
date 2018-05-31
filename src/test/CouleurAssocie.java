@@ -3,23 +3,19 @@ package test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javafx.scene.paint.Color;
 
 public class CouleurAssocie {
 
-	private double bleu=0;
-	private double vert=0;
-	private double rouge=0;
-	private double reste;
+	static Color Gris(int nivGris){
+		double bleu=0;
+		double vert=0;
+		double rouge=0;
+		double reste;
 
-	public Color couleur;
-
-	CouleurAssocie(int a){
-
-		reste=a/255.0;
+		reste=nivGris/255.0;
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		List<Integer> lstIndexes = new ArrayList<Integer>();
@@ -45,6 +41,6 @@ public class CouleurAssocie {
 			}
 		}
 
-		couleur=new Color(rouge, vert, bleu, 1);	
+		return new Color(rouge, vert, bleu, 1);	
 	}
 }
