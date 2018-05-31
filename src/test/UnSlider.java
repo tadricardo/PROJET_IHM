@@ -12,7 +12,7 @@ private Slider green = new Slider(0,255,0);
 private Slider blue = new Slider(0,255,0);
 private VBox contenair = new VBox(10);
 private VBox rectangle = new VBox(16);
-private VBox donnees = new VBox(10);
+private VBox donnees = new VBox(12);
 
 private static int compteur = 1;
 private static final int compteur2 = 10;
@@ -39,7 +39,7 @@ private static final int compteur2 = 10;
 		blue.setBlockIncrement(10);
 		
 		rectangle.setPadding(new Insets(0, 0, 16, 22));
-		donnees.setPadding(new Insets(0, 0, 16, 45));
+		donnees.setPadding(new Insets(0, 0, 16, 13));
 		ModuleCouleur mc = new ModuleCouleur( ( (int)(235)/compteur2 ) * compteur);
 		this.rectangle.getChildren().addAll(mc.r1,mc.r2);
 		this.donnees.getChildren().addAll(mc.text2,mc.text);

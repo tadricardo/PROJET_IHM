@@ -74,19 +74,19 @@ public class TestLudo extends Application {
 		HBox hbox = new HBox(10);
 		hbox.getChildren().addAll(bmoins, bplus);
 		vbox.getChildren().addAll(label, hbox);
-		vbox.setLayoutX(755);
+		vbox.setLayoutX(723);
 		vbox.setLayoutY(10);
-		gridPane.setHgap(18);
+		gridPane.setHgap(13);
 		gridPane.setLayoutY(140);
-		gridPane.setLayoutX(20);
+		gridPane.setLayoutX(6);
 		root.getChildren().addAll(vbox,gridPane);
 		
 		
-		Scene scene = new Scene(root, 1590, 600);
+		Scene scene = new Scene(root, 1590, 620);
 		stage.setResizable(false);
 		stage.setScene(scene);
 
-		stage.setTitle("INTERFACE DE VARIATION");
+		stage.setTitle("INTERFACE DE VARIATION DE COULEUR");
 		stage.show();
 
 	}
