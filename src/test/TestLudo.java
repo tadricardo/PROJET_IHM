@@ -1,13 +1,20 @@
 package test;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -21,11 +28,9 @@ public class TestLudo extends Application {
 	Label label;
 	Button bmoins;
 	Button bplus;
-	VBox rectangle = new VBox(25);
-	VBox monSlider = new VBox(10);
-	VBox colonne = new VBox(10);
-	HBox rgb = new HBox(25);
-	FlowPane mesSliders = new FlowPane(10,10);
+	GridPane gridPane = new GridPane();
+	HBox mesSliders = new HBox(10);
+	Text text;
 
 	// class interne permettant de gerer les EventHandler "clic souris"
 	class ClicListenerIncDec implements EventHandler<ActionEvent> {
@@ -37,38 +42,15 @@ public class TestLudo extends Application {
 			if (event.getTarget() == bplus && currentValue < 10) {
 
 				label.setText("" + (currentValue + 1));
-				
-				int nivGris=200;
-				Rectangle r1 = new Rectangle(100, 100);
-				r1.setFill( new Color( nivGris/255. ,nivGris/255. , nivGris/255. , 1. ));
-				Rectangle r2 = new Rectangle(100, 100);
-				Color coul= CouleurAssocie.Gris(nivGris);
-				r2.setFill(coul);
-				
-				rectangle.getChildren().addAll(r1,r2);
-				for (int i = 1; i <= 3; i++) {
-					Label labelRgb = new Label("0");
-					labelRgb.setStyle("-fx-background-color: lightblue;"+ " -fx-font: 30px Verdana;");
-					labelRgb.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-					rgb.getChildren().add(labelRgb);
-					
-					Slider slider = new Slider(0,255,0);
-					slider.setShowTickLabels(true);
-					slider.setShowTickMarks(true);
-					slider.setMajorTickUnit(50);
-					slider.setMinorTickCount(5);
-					slider.setBlockIncrement(10);
-					monSlider.getChildren().add(slider);
-				}
-				
-				colonne.getChildren().addAll(rectangle,monSlider,rgb);
-				mesSliders.getChildren().addAll(colonne);
-				
+				UnSlider us = new UnSlider();
+				gridPane.addColumn(currentValue,us.getVbox());
 			}
+
+				
 
 			if (event.getTarget() == bmoins) {
 
-				label.setText("" + currentValue );
+				label.setText("" + currentValue);
 			}
 
 		}
@@ -85,24 +67,26 @@ public class TestLudo extends Application {
 
 		bplus.addEventHandler(ActionEvent.ACTION, new ClicListenerIncDec());
 		bmoins.addEventHandler(ActionEvent.ACTION, new ClicListenerIncDec());
-
+		
 		Group root = new Group();
 		VBox vbox = new VBox(10);
 		vbox.setPadding(new Insets(10, 10, 10, 10));
-		rectangle.setPadding(new Insets(0, 0, 25, 25));
-		rgb.setPadding(new Insets(20, 20, 20, 20));
 		HBox hbox = new HBox(10);
 		hbox.getChildren().addAll(bmoins, bplus);
 		vbox.getChildren().addAll(label, hbox);
-		mesSliders.setLayoutY(180);
-		mesSliders.setLayoutX(10);
-		root.getChildren().addAll(vbox,mesSliders);
-
+		gridPane.setHgap(18);
+		gridPane.setLayoutY(140);
+		gridPane.setLayoutX(20);
+		root.getChildren().addAll(vbox,gridPane);
+		
+		
+		Scene scene = new Scene(root, 1590, 600);
 		stage.setResizable(false);
-		stage.setScene(new Scene(root, 800, 660));
+		stage.setScene(scene);
 
 		stage.setTitle("INTERFACE DE VARIATION");
 		stage.show();
+
 	}
 
 	public static void main(String[] args) {
