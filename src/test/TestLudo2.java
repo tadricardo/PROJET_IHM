@@ -59,8 +59,9 @@ public class TestLudo2 extends Application {
 				gris = new Rectangle(140, 140, Color.WHITE);
 				gris.setStroke(Color.BLACK);
 				gris.setStrokeWidth(3);
-
+				
 				colorPicker.setMaxWidth(143);
+				
 				vBox.getChildren().addAll(colorPicker, rgb, gris, text, text2);
 				gridPane.addColumn(currentValue, vBox);
 
@@ -102,6 +103,7 @@ public class TestLudo2 extends Application {
 		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
+				
 				Color color = colorPicker.getValue();
 				int red = (int) (color.getRed() * 255);
 				int green = (int) (color.getGreen() * 255);
