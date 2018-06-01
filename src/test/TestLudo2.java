@@ -50,18 +50,26 @@ public class TestLudo2 extends Application {
 				text2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 				text2.setFill(Color.BLACK);
 
-				VBox vBox = new VBox(20);
-				rgb = new Rectangle(142, 142, Color.WHITE);
-				gris = new Rectangle(142, 142, Color.WHITE);
+				VBox vBox = new VBox(30);
+
+				rgb = new Rectangle(140, 140, Color.WHITE);
+				rgb.setStroke(Color.BLACK);
+				rgb.setStrokeWidth(3);
+
+				gris = new Rectangle(140, 140, Color.WHITE);
+				gris.setStroke(Color.BLACK);
+				gris.setStrokeWidth(3);
+
+				colorPicker.setMaxWidth(143);
 				vBox.getChildren().addAll(colorPicker, rgb, gris, text, text2);
 				gridPane.addColumn(currentValue, vBox);
 
 			}
 
-			if (event.getTarget() == bmoins && currentValue>0) {
-				gridPane.getChildren().remove(gridPane.getChildren().size()-1);
+			if (event.getTarget() == bmoins && currentValue > 0) {
+				gridPane.getChildren().remove(gridPane.getChildren().size() - 1);
 				label.setText("" + (currentValue - 1));
-			
+
 			}
 		}
 
@@ -85,7 +93,7 @@ public class TestLudo2 extends Application {
 		HBox hbox = new HBox(10);
 		hbox.getChildren().addAll(bmoins, bplus);
 		vbox.getChildren().addAll(label, hbox);
-		vbox.setLayoutX(744);
+		vbox.setLayoutX(746);
 		vbox.setLayoutY(10);
 		gridPane.setHgap(16);
 		gridPane.setLayoutY(140);
@@ -93,7 +101,6 @@ public class TestLudo2 extends Application {
 
 		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
 
-			
 			public void handle(ActionEvent event) {
 				Color color = colorPicker.getValue();
 				int red = (int) (color.getRed() * 255);
@@ -104,15 +111,16 @@ public class TestLudo2 extends Application {
 				rgb.setFill(color);
 
 				gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
-				text.setText("   R: " + red + "   G: " + green + "   B: "+ blue);
-				text2.setText("        " + (int) (color.getRed() * 10) / 10.0 + "    " + (int) (color.getGreen() * 10) / 10.0
-						+ "    " + (int) (color.getBlue() * 10) / 10.0);
+				text.setText("   R: " + red + "   G: " + green + "   B: " + blue);
+				text2.setText("        " + (int) (color.getRed() * 10) / 10.0 + "    "
+						+ (int) (color.getGreen() * 10) / 10.0 + "    " + (int) (color.getBlue() * 10) / 10.0);
 			}
 		});
 
 		root.getChildren().addAll(vbox, gridPane);
 
 		Scene scene = new Scene(root, 1590, 620);
+		scene.setFill(Color.rgb(204, 204, 204));
 		stage.setResizable(false);
 		stage.setScene(scene);
 
