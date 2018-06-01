@@ -42,11 +42,11 @@ public class TestLudo2 extends Application {
 
 				label.setText("" + (currentValue + 1));
 
-				text = new Text("R:  " + 1 + "    G:  " + 1 + "    B:  " + 1);
+				text = new Text("R:  " + 255 + "    G:  " + 255 + "    B:  " + 255);
 				text.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 				text.setFill(Color.BLACK);
 
-				text2 = new Text("   " + 0.9 + "        " + 0.9 + "       " + 0.9);
+				text2 = new Text("   " + 1.0 + "        " + 1.0 + "       " + 1.0);
 				text2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 				text2.setFill(Color.BLACK);
 
