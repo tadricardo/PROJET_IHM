@@ -68,7 +68,7 @@ public class TestLudo2 extends Application {
 			}
 
 			if (event.getTarget() == bmoins && currentValue > 0) {
-				gridPane.getChildren().remove(gridPane.getChildren().size() - 1);
+				gridPane.getChildren().remove(currentValue-1);
 				label.setText("" + (currentValue - 1));
 
 			}
