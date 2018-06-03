@@ -1,10 +1,15 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -26,6 +31,11 @@ public class TestLudo2 extends Application {
 	Button bplus;
 	GridPane gridPane = new GridPane();
 	ColorPicker colorPicker = new ColorPicker();
+	Color[] colorsRgb = new Color[10];
+	Text[] texts = new Text[10];
+	int[] colorsGrey = new int[10];
+	Text[] texts2 = new Text[10];
+	int currentValue = 0;
 	Rectangle rgb;
 	Rectangle gris;
 	int grey;
@@ -36,9 +46,7 @@ public class TestLudo2 extends Application {
 
 		public void handle(ActionEvent event) {
 
-			int currentValue = Integer.parseInt(label.getText());
-
-			if (event.getTarget() == bplus && currentValue < 10) {
+			if (event.getTarget() == bplus && Integer.parseInt(label.getText()) < 10) {
 
 				label.setText("" + (currentValue + 1));
 
@@ -59,18 +67,55 @@ public class TestLudo2 extends Application {
 				gris = new Rectangle(140, 140, Color.WHITE);
 				gris.setStroke(Color.BLACK);
 				gris.setStrokeWidth(3);
-				
+
+				colorPicker.setValue(Color.WHITE);
 				colorPicker.setMaxWidth(143);
-				
+
+				colorsRgb[currentValue] = Color.WHITE;
+				colorsGrey[currentValue] = 255;
+				texts[currentValue] = text;
+				texts2[currentValue] = text2;
+
 				vBox.getChildren().addAll(colorPicker, rgb, gris, text, text2);
+
 				gridPane.addColumn(currentValue, vBox);
 
+				currentValue++;
 			}
 
-			if (event.getTarget() == bmoins && currentValue > 0) {
-				gridPane.getChildren().remove(currentValue-1);
-				label.setText("" + (currentValue - 1));
+			if (event.getTarget() == bmoins) {
 
+				VBox vbox2 = new VBox(30);
+				colorPicker.setMaxWidth(143);
+
+				if (gridPane.getChildren().size() == 1)
+
+					label.setText("" + (currentValue));
+
+				else {
+
+					rgb = new Rectangle(140, 140, colorsRgb[currentValue - 2]);
+					rgb.setStroke(Color.BLACK);
+					rgb.setStrokeWidth(3);
+
+					gris = new Rectangle(140, 140, new Color(colorsGrey[currentValue - 2] / 255.,
+							colorsGrey[currentValue - 2] / 255., colorsGrey[currentValue - 2] / 255., 1.));
+					gris.setStroke(Color.BLACK);
+					gris.setStrokeWidth(3);
+
+					colorPicker.setValue(colorsRgb[currentValue - 2]);
+					gridPane.getChildren().remove(currentValue - 1);
+					gridPane.getChildren().remove(currentValue - 2);
+
+					vbox2.getChildren().addAll(colorPicker, rgb, gris, texts[currentValue - 2],
+							texts2[currentValue - 2]);
+
+					gridPane.addColumn(currentValue - 2, vbox2);
+
+					label.setText("" + (currentValue - 1));
+
+					currentValue--;
+				}
 			}
 		}
 
@@ -103,7 +148,7 @@ public class TestLudo2 extends Application {
 		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
-				
+
 				Color color = colorPicker.getValue();
 				int red = (int) (color.getRed() * 255);
 				int green = (int) (color.getGreen() * 255);
@@ -116,6 +161,12 @@ public class TestLudo2 extends Application {
 				text.setText("   R: " + red + "   G: " + green + "   B: " + blue);
 				text2.setText("        " + (int) (color.getRed() * 10) / 10.0 + "    "
 						+ (int) (color.getGreen() * 10) / 10.0 + "    " + (int) (color.getBlue() * 10) / 10.0);
+
+				colorsRgb[currentValue - 1] = color;
+				colorsGrey[currentValue - 1] = grey;
+				texts[currentValue - 1] = text;
+				texts2[currentValue - 1] = text2;
+
 			}
 		});
 
