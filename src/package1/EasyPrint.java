@@ -1,4 +1,4 @@
-package test;
+package package1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class TestLudo2 extends Application {
+public class EasyPrint extends Application {
 
 	Label label;
 	Button bmoins;
@@ -50,7 +50,7 @@ public class TestLudo2 extends Application {
 
 				label.setText("" + (currentValue + 1));
 
-				text = new Text("R:  " + 255 + "    G:  " + 255 + "    B:  " + 255);
+				text = new Text(" R: " + 255 + " G:" + 255 + " B:" + 255);
 				text.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 				text.setFill(Color.BLACK);
 
@@ -141,7 +141,7 @@ public class TestLudo2 extends Application {
 		vbox.getChildren().addAll(label, hbox);
 		vbox.setLayoutX(746);
 		vbox.setLayoutY(10);
-		gridPane.setHgap(16);
+		gridPane.setHgap(13);
 		gridPane.setLayoutY(140);
 		gridPane.setLayoutX(12);
 
@@ -158,7 +158,7 @@ public class TestLudo2 extends Application {
 				rgb.setFill(color);
 
 				gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
-				text.setText("   R: " + red + "   G: " + green + "   B: " + blue);
+				text.setText("R: " + red + " G: " + green + " B: " + blue);
 				text2.setText("        " + (int) (color.getRed() * 10) / 10.0 + "    "
 						+ (int) (color.getGreen() * 10) / 10.0 + "    " + (int) (color.getBlue() * 10) / 10.0);
 
@@ -184,7 +184,7 @@ public class TestLudo2 extends Application {
 
 	public static void main(String[] args) {
 
-		Application.launch(TestLudo2.class, args);
+		Application.launch(EasyPrint.class, args);
 
 	}
 }

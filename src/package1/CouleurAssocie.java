@@ -1,4 +1,4 @@
-package test;
+package package1;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class CouleurAssocie {
 
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		
-		//liste permettant de, une fois melangée, traiter le couleurs dans un ordre aleatoire
+		//liste permettant de, une fois melangï¿½e, traiter le couleurs dans un ordre aleatoire
 		List<Integer> lstIndexes = new ArrayList<Integer>();
 		lstIndexes.add(1);
 		lstIndexes.add(2);
@@ -39,8 +39,8 @@ public class CouleurAssocie {
 		for(Integer index : lstIndexes) {
 			switch(index) {
 			
-			//remplis chaque couleur avec un nombre aleatoire de point de couleur prennant en compte la quantité de points restante, 
-			//,si d'autres couleurs ont deja ete remplies et la quantité max de la couleur traitée
+			//remplis chaque couleur avec un nombre aleatoire de point de couleur prennant en compte la quantitï¿½ de points restante, 
+			//,si d'autres couleurs ont deja ete remplies et la quantitï¿½ max de la couleur traitï¿½e
 			
 			case 1://bleu
 				
