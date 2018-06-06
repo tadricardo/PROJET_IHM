@@ -41,7 +41,7 @@ public class EasyPrint extends Application {
 	int grey;
 	Text text;
 	Text text2;
-
+	
 	class ClicListenerIncDec implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent event) {
