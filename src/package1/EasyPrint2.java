@@ -32,7 +32,7 @@ public class EasyPrint2 extends Application {
 	Scene scene;
 	Scene sceneUtilisateur;
 	Scene sceneAleatoire;
-	int choix = 1;
+	int choix = 2;
 	Group root = new Group();
 	GridPane gridPane = new GridPane();
 	ColorPicker colorPicker = new ColorPicker();
@@ -135,7 +135,7 @@ public class EasyPrint2 extends Application {
 		utilisateur.addEventHandler(ActionEvent.ACTION, new ClicListener());
 
 		HBox hboxChoix = new HBox(30);
-		hboxChoix.setLayoutX(600);
+		hboxChoix.setLayoutX(570);
 		hboxChoix.setLayoutY(620);
 		hboxChoix.getChildren().addAll(aleatoire, utilisateur);
 
@@ -143,9 +143,9 @@ public class EasyPrint2 extends Application {
 
 			choix = 0;
 			GridPane gridPane = new GridPane();
-			gridPane.setHgap(20);
+			gridPane.setHgap(14);
 			gridPane.setLayoutY(154);
-			gridPane.setLayoutX(18);
+			gridPane.setLayoutX(14);
 			
 			VBox[] box = new VBox[10];
 			ModuleCouleur[] mod = new ModuleCouleur[10];
@@ -162,7 +162,7 @@ public class EasyPrint2 extends Application {
 			}
 
 			root.getChildren().addAll(gridPane, hboxChoix);
-			sceneAleatoire = new Scene(root, 1450, 700);
+			sceneAleatoire = new Scene(root, 1380, 700);
 			sceneAleatoire.setFill(Color.rgb(204, 204, 204));
 			stage.setScene(sceneAleatoire);
 
@@ -179,11 +179,11 @@ public class EasyPrint2 extends Application {
 
 			hBox.getChildren().addAll(bmoins, bplus);
 			vBox.getChildren().addAll(label, hBox);
-			vBox.setLayoutX(674);
+			vBox.setLayoutX(642);
 			vBox.setLayoutY(18);
-			gridPane.setHgap(20);
+			gridPane.setHgap(14);
 			gridPane.setLayoutY(154);
-			gridPane.setLayoutX(18);
+			gridPane.setLayoutX(14);
 
 			colorPicker.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -211,7 +211,7 @@ public class EasyPrint2 extends Application {
 			});
 
 			root.getChildren().addAll(vBox, gridPane, hboxChoix);
-			sceneUtilisateur = new Scene(root, 1450, 700);
+			sceneUtilisateur = new Scene(root, 1380, 700);
 			sceneUtilisateur.setFill(Color.rgb(204, 204, 204));
 			stage.setScene(sceneUtilisateur);
 
