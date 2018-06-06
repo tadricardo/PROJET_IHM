@@ -29,6 +29,11 @@ public class EasyPrint extends Application {
 	Label label;
 	Button bmoins;
 	Button bplus;
+	Button aleatoire = new Button("Mode Aléatoire");
+	Button modeUtilisateur = new Button("Mode utilisateur");
+
+	Scene scene;
+	Group root;
 	GridPane gridPane = new GridPane();
 	ColorPicker colorPicker = new ColorPicker();
 	Color[] colorsRgb = new Color[10];
@@ -120,10 +125,28 @@ public class EasyPrint extends Application {
 		}
 
 	}
+	
+	class ClicListenerChoix implements EventHandler<ActionEvent> {
 
-	@Override
-	public void start(Stage stage) throws Exception {
-
+		public void handle(ActionEvent event) {
+			
+			
+			if(event.getTarget() == aleatoire) {
+				
+				
+				
+			}
+			
+			if(event.getTarget() == modeUtilisateur) {
+				
+				ModeUtilisateur();
+			}
+		}
+	}
+		
+		
+	public void ModeUtilisateur() {
+		
 		label = new Label("0");
 		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		label.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
@@ -133,7 +156,93 @@ public class EasyPrint extends Application {
 		bplus.addEventHandler(ActionEvent.ACTION, new ClicListenerIncDec());
 		bmoins.addEventHandler(ActionEvent.ACTION, new ClicListenerIncDec());
 
-		Group root = new Group();
+		//Group root = new Group();
+		VBox vbox = new VBox(10);
+		vbox.setPadding(new Insets(10, 10, 10, 10));
+		HBox hbox = new HBox(10);
+		hbox.getChildren().addAll(bmoins, bplus);
+		vbox.getChildren().addAll(label, hbox);
+		vbox.setLayoutX(746);
+		vbox.setLayoutY(10);
+		gridPane.setHgap(13);
+		gridPane.setLayoutY(140);
+		gridPane.setLayoutX(12);
+
+		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent event) {
+
+				Color color = colorPicker.getValue();
+				int red = (int) (color.getRed() * 255);
+				int green = (int) (color.getGreen() * 255);
+				int blue = (int) (color.getBlue() * 255);
+				grey = (int) ((color.getRed() * 255 * 0.2125) + (color.getGreen() * 255 * 0.7154)
+						+ (color.getBlue() * 255 * 0.0721));
+				rgb.setFill(color);
+
+				gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
+				text.setText("  R: " + red + " G: " + green + " B: " + blue);
+				text2.setText("       " + (int) (color.getRed() * 10) / 10.0 + "    "
+						+ (int) (color.getGreen() * 10) / 10.0 + "    " + (int) (color.getBlue() * 10) / 10.0);
+
+				colorsRgb[currentValue - 1] = color;
+				colorsGrey[currentValue - 1] = grey;
+				texts[currentValue - 1] = text;
+				texts2[currentValue - 1] = text2;
+
+			}
+		});
+
+		HBox buttonChoix = new HBox(30);
+		buttonChoix.setLayoutX(650);
+		buttonChoix.setLayoutY(580);
+		buttonChoix.getChildren().addAll(aleatoire, modeUtilisateur);
+		root.getChildren().addAll(vbox, gridPane);
+		scene = new Scene(root,1590,620);
+		//stage.show();
+
+		/*Scene scene = new Scene(root, 1590, 620);
+		scene.setFill(Color.rgb(204, 204, 204));
+		stage.setResizable(false);
+		stage.setScene(scene);
+
+		stage.setTitle("INTERFACE DE VARIATION DE COULEUR");
+		stage.show();*/
+
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		
+		HBox buttonChoix = new HBox(30);
+		buttonChoix.setLayoutX(650);
+		buttonChoix.setLayoutY(580);
+		buttonChoix.getChildren().addAll(aleatoire, modeUtilisateur);
+		
+		root = new Group();
+		Scene scene = new Scene(root, 1590, 620);
+		scene.setFill(Color.rgb(204, 204, 204));
+		stage.setResizable(false);
+		root.getChildren().add(buttonChoix);
+		stage.setScene(scene);
+		
+		aleatoire.addEventHandler(ActionEvent.ACTION, new ClicListenerChoix());
+		buttonChoix.addEventHandler(ActionEvent.ACTION, new ClicListenerChoix());
+
+		
+		stage.setTitle("INTERFACE DE VARIATION DE COULEUR");
+		stage.show();
+		/*
+		label = new Label("0");
+		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		label.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
+		bmoins = new Button("  -  ");
+		bplus = new Button("  +  ");
+
+		bplus.addEventHandler(ActionEvent.ACTION, new ClicListenerIncDec());
+		bmoins.addEventHandler(ActionEvent.ACTION, new ClicListenerIncDec());
+
+		//Group root = new Group();
 		VBox vbox = new VBox(10);
 		vbox.setPadding(new Insets(10, 10, 10, 10));
 		HBox hbox = new HBox(10);
@@ -172,13 +281,13 @@ public class EasyPrint extends Application {
 
 		root.getChildren().addAll(vbox, gridPane);
 
-		Scene scene = new Scene(root, 1590, 620);
+		/*Scene scene = new Scene(root, 1590, 620);
 		scene.setFill(Color.rgb(204, 204, 204));
 		stage.setResizable(false);
 		stage.setScene(scene);
 
 		stage.setTitle("INTERFACE DE VARIATION DE COULEUR");
-		stage.show();
+		stage.show();*/
 
 	}
 
