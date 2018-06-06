@@ -50,11 +50,11 @@ public class EasyPrint extends Application {
 
 				label.setText("" + (currentValue + 1));
 
-				text = new Text(" R: " + 255 + " G:" + 255 + " B:" + 255);
+				text = new Text("  R: " + 255 + " G:" + 255 + " B:" + 255);
 				text.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 				text.setFill(Color.BLACK);
 
-				text2 = new Text("   " + 1.0 + "        " + 1.0 + "       " + 1.0);
+				text2 = new Text("  " + 1.0 + "      " + 1.0 + "       " + 1.0);
 				text2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 				text2.setFill(Color.BLACK);
 
@@ -158,8 +158,8 @@ public class EasyPrint extends Application {
 				rgb.setFill(color);
 
 				gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
-				text.setText("R: " + red + " G: " + green + " B: " + blue);
-				text2.setText("        " + (int) (color.getRed() * 10) / 10.0 + "    "
+				text.setText("  R: " + red + " G: " + green + " B: " + blue);
+				text2.setText("       " + (int) (color.getRed() * 10) / 10.0 + "    "
 						+ (int) (color.getGreen() * 10) / 10.0 + "    " + (int) (color.getBlue() * 10) / 10.0);
 
 				colorsRgb[currentValue - 1] = color;
