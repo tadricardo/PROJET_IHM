@@ -32,7 +32,6 @@ public class EasyPrint2 extends Application {
 	Scene scene;
 	Scene sceneUtilisateur;
 	Scene sceneAleatoire;
-	int choix = 2;
 	Group root = new Group();
 	GridPane gridPane = new GridPane();
 	ColorPicker colorPicker = new ColorPicker();
@@ -46,6 +45,8 @@ public class EasyPrint2 extends Application {
 	int grey;
 	Text text;
 	Text text2;
+	
+
 
 	class ClicListener implements EventHandler<ActionEvent> {
 
@@ -134,95 +135,100 @@ public class EasyPrint2 extends Application {
 		aleatoire.addEventHandler(ActionEvent.ACTION, new ClicListener());
 		utilisateur.addEventHandler(ActionEvent.ACTION, new ClicListener());
 
-		HBox hboxChoix = new HBox(30);
+		final HBox hboxChoix = new HBox(30);
 		hboxChoix.setLayoutX(570);
 		hboxChoix.setLayoutY(620);
 		hboxChoix.getChildren().addAll(aleatoire, utilisateur);
+		
 
-		if (choix == 1) {
+		aleatoire.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
 
-			choix = 0;
-			GridPane gridPane = new GridPane();
-			gridPane.setHgap(14);
-			gridPane.setLayoutY(154);
-			gridPane.setLayoutX(14);
-			
-			VBox[] box = new VBox[10];
-			ModuleCouleur[] mod = new ModuleCouleur[10];
-			
-			// 5 pixels space between child nodes
-			int num = 10;
-			for(int i = 0; i < 10; i++) {
+				root.getChildren().clear();
+				root.getChildren().addAll(hboxChoix);
+				GridPane gridPane = new GridPane();
+				gridPane.setHgap(14);
+				gridPane.setLayoutY(154);
+				gridPane.setLayoutX(14);
 				
-				box[i] = new VBox(30);
-				mod[i] = new ModuleCouleur(((int) (235) / num) * (i+1));
-				box[i].getChildren().addAll(mod[i].r1, mod[i].r2, mod[i].text, mod[i].text2);
-				gridPane.addColumn(i, box[i]);
+				VBox[] box = new VBox[10];
+				ModuleCouleur[] mod = new ModuleCouleur[10];
 				
-			}
-
-			root.getChildren().addAll(gridPane, hboxChoix);
-			sceneAleatoire = new Scene(root, 1380, 700);
-			sceneAleatoire.setFill(Color.rgb(204, 204, 204));
-			stage.setScene(sceneAleatoire);
-
-		} else if (choix == 2) {
-
-			choix = 0;
-			label = new Label("0");
-			label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			label.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
-
-			vBox = new VBox(10);
-			vBox.setPadding(new Insets(10, 10, 10, 10));
-			hBox = new HBox(10);
-
-			hBox.getChildren().addAll(bmoins, bplus);
-			vBox.getChildren().addAll(label, hBox);
-			vBox.setLayoutX(642);
-			vBox.setLayoutY(18);
-			gridPane.setHgap(14);
-			gridPane.setLayoutY(154);
-			gridPane.setLayoutX(14);
-
-			colorPicker.setOnAction(new EventHandler<ActionEvent>() {
-
-				public void handle(ActionEvent event) {
-
-					Color color = colorPicker.getValue();
-					int red = (int) (color.getRed() * 255);
-					int green = (int) (color.getGreen() * 255);
-					int blue = (int) (color.getBlue() * 255);
-					grey = (int) ((color.getRed() * 255 * 0.2125) + (color.getGreen() * 255 * 0.7154)
-							+ (color.getBlue() * 255 * 0.0721));
-					rgb.setFill(color);
-
-					gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
-					text.setText("  R: " + red + "  G: " + green + "  B: " + blue);
-					text2.setText("     " + (int) (color.getRed() * 10) / 10.0 + "     "
-							+ (int) (color.getGreen() * 10) / 10.0 + "     " + (int) (color.getBlue() * 10) / 10.0);
-
-					colorsRgb[currentValue - 1] = color;
-					colorsGrey[currentValue - 1] = grey;
-					texts[currentValue - 1] = text;
-					texts2[currentValue - 1] = text2;
-
+				// 5 pixels space between child nodes
+				int num = 10;
+				for(int i = 0; i < 10; i++) {
+					box[i] = new VBox(30);
+					mod[i] = new ModuleCouleur(((int) (235) / num) * (i+1));
+					box[i].getChildren().addAll(mod[i].r1, mod[i].r2, mod[i].text, mod[i].text2);
+					gridPane.addColumn(i, box[i]);
+					
 				}
-			});
+	
+				root.getChildren().addAll(gridPane);
 
-			root.getChildren().addAll(vBox, gridPane, hboxChoix);
-			sceneUtilisateur = new Scene(root, 1380, 700);
-			sceneUtilisateur.setFill(Color.rgb(204, 204, 204));
-			stage.setScene(sceneUtilisateur);
+			}
+		});
 
-		} else {
+		utilisateur.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+
+				root.getChildren().clear();
+				root.getChildren().addAll(hboxChoix);
+				label = new Label("0");
+				label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				label.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
+	
+				vBox = new VBox(10);
+				vBox.setPadding(new Insets(10, 10, 10, 10));
+				hBox = new HBox(10);
+	
+				hBox.getChildren().addAll(bmoins, bplus);
+				vBox.getChildren().addAll(label, hBox);
+				vBox.setLayoutX(642);
+				vBox.setLayoutY(18);
+				gridPane.setHgap(14);
+				gridPane.setLayoutY(154);
+				gridPane.setLayoutX(14);
+				
+	
+				colorPicker.setOnAction(new EventHandler<ActionEvent>() {
+	
+					public void handle(ActionEvent event) {
+	
+						Color color = colorPicker.getValue();
+						int red = (int) (color.getRed() * 255);
+						int green = (int) (color.getGreen() * 255);
+						int blue = (int) (color.getBlue() * 255);
+						grey = (int) ((color.getRed() * 255 * 0.2125) + (color.getGreen() * 255 * 0.7154)
+								+ (color.getBlue() * 255 * 0.0721));
+						rgb.setFill(color);
+	
+						gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
+						text.setText("  R: " + red + "  G: " + green + "  B: " + blue);
+						text2.setText("     " + (int) (color.getRed() * 10) / 10.0 + "     "
+								+ (int) (color.getGreen() * 10) / 10.0 + "     " + (int) (color.getBlue() * 10) / 10.0);
+	
+						colorsRgb[currentValue - 1] = color;
+						colorsGrey[currentValue - 1] = grey;
+						texts[currentValue - 1] = text;
+						texts2[currentValue - 1] = text2;
+	
+					}
+				});
+	
+				root.getChildren().addAll(vBox, gridPane);
+
+		}
+		
+	});
 
 			root.getChildren().addAll(hboxChoix);
+			
 			scene = new Scene(root, 1450, 700);
 			scene.setFill(Color.rgb(204, 204, 204));
 			stage.setResizable(false);
 			stage.setScene(scene);
-		}
+		
 
 		stage.setTitle("INTERFACE DE VARIATION DE COULEUR");
 		stage.show();
