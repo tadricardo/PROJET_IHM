@@ -28,11 +28,11 @@ public class ModuleCouleur {
 
 		r2.setFill(couleur);
 
-		text = new Text("  R: "+(int)(couleur.getRed()*255)+ "  G: " + (int)(couleur.getGreen()*255) + "  B: " + (int)(couleur.getBlue()*255) );
+		text = new Text("RGB ("+(int)(couleur.getRed()*255)+ "," + (int)(couleur.getGreen()*255) + "," + (int)(couleur.getBlue()*255)+")" );
 		text.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 		text.setFill(Color.BLACK);
 		
-		text2 = new Text("     "+ (int)(couleur.getRed()*10)/10.0+ "     " +  (int)(couleur.getGreen()*10)/10.0 + "     " +  (int)(couleur.getBlue()*10)/10.0 );
+		text2 = new Text("    "+ (int)(couleur.getRed()*10)/10.0+ "   " +  (int)(couleur.getGreen()*10)/10.0 + "   " +  (int)(couleur.getBlue()*10)/10.0 );
 		text2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));  
 		text2.setFill(Color.BLACK);
 		
@@ -40,9 +40,7 @@ public class ModuleCouleur {
 		r3.setFill(couleur.grayscale());
 		r3.setStroke(Color.BLACK);
 		r3.setStrokeWidth(2);
-		
 
-		
+
 	}
-
 }

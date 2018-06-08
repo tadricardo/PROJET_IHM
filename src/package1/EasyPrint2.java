@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +18,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class EasyPrint2 extends Application {
@@ -59,11 +61,11 @@ public class EasyPrint2 extends Application {
 
 					labelUtil.setText("" + (currentValue + 1));
 
-					text = new Text("  R: " + 255 + "  G: " + 255 + "  B: " + 255);
+					text = new Text("RGB (" + 255 + "," + 255 + "," + 255 +")");
 					text.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 					text.setFill(Color.BLACK);
 
-					text2 = new Text("     " + 1.0 + "     " + 1.0 + "     " + 1.0);
+					text2 = new Text("    " + 1.0 + "   " + 1.0 + "   " + 1.0);
 					text2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 					text2.setFill(Color.BLACK);
 
@@ -156,9 +158,9 @@ public class EasyPrint2 extends Application {
 		labelAlea.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
 
 		GridPane gridPane = new GridPane();
-		gridPane.setHgap(12);
-		gridPane.setLayoutY(180);
-		gridPane.setLayoutX(8);
+		gridPane.setHgap(34);
+		gridPane.setLayoutY(235);
+		gridPane.setLayoutX(26);
 
 		vBoxAlea = new VBox(10);
 		vBoxAlea.setPadding(new Insets(10, 10, 10, 10));
@@ -166,7 +168,7 @@ public class EasyPrint2 extends Application {
 
 		hBoxAlea.getChildren().addAll(bmoinsAlea, bplusAlea);
 		vBoxAlea.getChildren().addAll(labelAlea, hBoxAlea, regenerer);
-		vBoxAlea.setLayoutX(628);
+		vBoxAlea.setLayoutX(734);
 		vBoxAlea.setLayoutY(18);
 
 		VBox[] box = new VBox[10];
@@ -177,7 +179,7 @@ public class EasyPrint2 extends Application {
 		for (int i = 0; i < Integer.parseInt(labelAlea.getText()); i++) {
 			box[i] = new VBox(30);
 			mod[i] = new ModuleCouleur(((int) (235) / num) * (i + 1));
-			box[i].getChildren().addAll(mod[i].r1, mod[i].r2, mod[i].text, mod[i].text2);
+			box[i].getChildren().addAll(mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
 			gridPane.addColumn(i, box[i]);
 		}
 
@@ -193,7 +195,7 @@ public class EasyPrint2 extends Application {
 		labelUtil.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
 
 		vBoxUtil = new VBox(10);
-		vBoxUtil.setLayoutX(628);
+		vBoxUtil.setLayoutX(734);
 		vBoxUtil.setLayoutY(18);
 		vBoxUtil.setPadding(new Insets(10, 10, 10, 10));
 		
@@ -201,9 +203,9 @@ public class EasyPrint2 extends Application {
 		hBoxUtil.getChildren().addAll(bmoinsUtil, bplusUtil);
 		vBoxUtil.getChildren().addAll(labelUtil, hBoxUtil);
 		
-		gridPane.setHgap(12);
-		gridPane.setLayoutY(154);
-		gridPane.setLayoutX(8);
+		gridPane.setHgap(34);
+		gridPane.setLayoutY(220);
+		gridPane.setLayoutX(26);
 
 		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -220,9 +222,9 @@ public class EasyPrint2 extends Application {
 				rgb.setFill(color);
 
 				gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
-				text.setText("  R: " + red + "  G: " + green + "  B: " + blue);
-				text2.setText("     " + (int) (color.getRed() * 10) / 10.0 + "     "
-						+ (int) (color.getGreen() * 10) / 10.0 + "     " + (int) (color.getBlue() * 10) / 10.0);
+				text.setText("RGB (" + red + "," + green + "," + blue +")");
+				text2.setText("    " + (int) (color.getRed() * 10) / 10.0 + "   "
+						+ (int) (color.getGreen() * 10) / 10.0 + "   " + (int) (color.getBlue() * 10) / 10.0);
 
 				colorsRgb[currentValue - 1] = color;
 				colorsGrey[currentValue - 1] = grey;
@@ -245,8 +247,8 @@ public class EasyPrint2 extends Application {
 		bmoinsAlea.addEventHandler(ActionEvent.ACTION, new ClicListener());
 		regenerer.addEventHandler(ActionEvent.ACTION, new ClicListener());
 
-		hboxChoix.setLayoutX(558);
-		hboxChoix.setLayoutY(620);
+		hboxChoix.setLayoutX(650);
+		hboxChoix.setLayoutY(760);
 		hboxChoix.getChildren().addAll(aleatoire, utilisateur);
 
 		aleatoire.setOnAction(new EventHandler<ActionEvent>() {
@@ -268,13 +270,27 @@ public class EasyPrint2 extends Application {
 
 		root.getChildren().addAll(hboxChoix);
 
-		Scene scene = new Scene(root, 1340, 700);
+		Scene scene = new Scene(root);
 		scene.setFill(Color.rgb(204, 204, 204));
 
+		
+		
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.setTitle("INTERFACE DE VARIATION DE COULEUR");
+		
+		Screen screen = Screen.getPrimary();
+		Rectangle2D bounds = screen.getVisualBounds();
+		stage.setX(bounds.getMinX());
+		stage.setY(bounds.getMinY());
+		stage.setWidth(bounds.getWidth());
+		stage.setHeight(bounds.getHeight());
+		
+		
 		stage.show();
+		
+		
+		
 
 	}
 
