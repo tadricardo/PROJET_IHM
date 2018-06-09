@@ -179,7 +179,7 @@ public class EasyPrint2 extends Application {
 		for (int i = 0; i < Integer.parseInt(labelAlea.getText()); i++) {
 			box[i] = new VBox(30);
 			mod[i] = new ModuleCouleur(((int) (235) / num) * (i + 1));
-			box[i].getChildren().addAll(mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
+			box[i].getChildren().addAll(mod[i].rectCouleur, mod[i].rectGris, mod[i].rgb255, mod[i].rgbs);
 			gridPane.addColumn(i, box[i]);
 		}
 
