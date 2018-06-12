@@ -1,5 +1,6 @@
 package package1;
 
+import javafx.scene.control.CheckBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -13,7 +14,7 @@ public class ModuleCouleur {
 	Rectangle r3;
 	Text text;
 	Text text2;
-	
+
 	
 	ModuleCouleur(int nivGris){
 		r1 = new Rectangle(120, 120);
