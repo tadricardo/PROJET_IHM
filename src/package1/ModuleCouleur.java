@@ -16,17 +16,17 @@ public class ModuleCouleur {
 	
 	ModuleCouleur(int nivGris){
 		
-		//rectangle de la teinte de gris fonies en parametre
+		//rectangle de la teinte de gris fournie en parametre
 		rectGris = new Rectangle(120, 120);
 		rectGris.setFill( new Color( nivGris/255. ,nivGris/255. , nivGris/255. , 1. ));
 		rectGris.setStroke(Color.BLACK);
 		rectGris.setStrokeWidth(2);
 		
-		//une couleur correspondant au gris
+		//une couleur aleatoire correspondante au gris
 		Color couleur= CouleurAssocie.Gris(nivGris);
 
 		
-		//rectangle d'une couleur correspondant au gris
+		//rectangle d'une couleur correspondante au gris
 		rectCouleur = new Rectangle(120, 120);
 		rectCouleur.setFill(couleur);
 		rectCouleur.setStroke(Color.BLACK);
