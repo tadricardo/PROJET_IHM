@@ -177,10 +177,12 @@ public class EasyPrint2 extends Application {
 		// 5 pixels space between child nodes
 		int num = Integer.parseInt(labelAlea.getText());
 		for (int i = 0; i < Integer.parseInt(labelAlea.getText()); i++) {
+			if (!mod[i].verouille) {
 			box[i] = new VBox(30);
 			mod[i] = new ModuleCouleur(((int) (235) / num) * (i + 1));
 			box[i].getChildren().addAll(mod[i].rectCouleur, mod[i].rectGris, mod[i].rgb255, mod[i].rgbs);
 			gridPane.addColumn(i, box[i]);
+			}
 		}
 
 		root.getChildren().addAll(vBoxAlea, gridPane);

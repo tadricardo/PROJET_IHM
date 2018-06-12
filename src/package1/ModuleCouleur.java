@@ -12,6 +12,7 @@ public class ModuleCouleur {
 	Rectangle rectCouleur;//couleur correspondante
 	Text rgb255;//code rgb255 de la couleur
 	Text rgbs;//code rgbs de la couleur
+	boolean verouille;//verouille la couleur lors de la regeneration aleatoire
 	
 	
 	ModuleCouleur(int nivGris){
