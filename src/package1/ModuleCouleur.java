@@ -1,6 +1,5 @@
 package package1;
 
-import javafx.scene.control.CheckBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -14,8 +13,6 @@ public class ModuleCouleur {
 	Rectangle r3;
 	Text text;
 	Text text2;
-	public boolean verouille=false;
-	CheckBox checkBox = new CheckBox("Valider");
 	
 	
 	ModuleCouleur(int nivGris){
