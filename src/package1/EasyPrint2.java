@@ -56,21 +56,22 @@ public class EasyPrint2 extends Application {
 	ModuleCouleur[] mod = new ModuleCouleur[10];
 	CheckBox[] checkBox = new CheckBox[10];
 
+	boolean dis = false;
 
 	class ClicListener implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent event) {
 
-			//gere les evenements ajouter/enlever une couleur du mode utilisateur
+			// gere les evenements ajouter/enlever une couleur du mode utilisateur
 			if (event.getTarget() == bplusUtil || event.getTarget() == bmoinsUtil) {
 
-				//gere l'evenement ajout d'une couleur juqu'a 10 couleurs max
+				// gere l'evenement ajout d'une couleur juqu'a 10 couleurs max
 				if (event.getTarget() == bplusUtil && Integer.parseInt(labelUtil.getText()) < 10) {
 
-					//creer un nouveau module couleur
+					// creer un nouveau module couleur
 					labelUtil.setText("" + (currentValue + 1));
 
-					text = new Text("RGB (" + 255 + "," + 255 + "," + 255 +")");
+					text = new Text("RGB (" + 255 + "," + 255 + "," + 255 + ")");
 					text.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
 					text.setFill(Color.BLACK);
 
@@ -103,7 +104,7 @@ public class EasyPrint2 extends Application {
 					currentValue++;
 				}
 
-				//gere l'evenement suppression d'une couleur jusqu'a 0 couleur mini
+				// gere l'evenement suppression d'une couleur jusqu'a 0 couleur mini
 				if (event.getTarget() == bmoinsUtil) {
 
 					VBox vbox2 = new VBox(30);
@@ -138,48 +139,100 @@ public class EasyPrint2 extends Application {
 						currentValue--;
 					}
 				}
-			} else {//gere les evenements ajouter/enlever une couleur du mode utilisateur
+			} else {// gere les evenements ajouter/enlever une couleur du mode utilisateur
 
-				//gere l'evenement ajout d'une couleur jusqu'a 10 couleurs max
+				// gere l'evenement ajout d'une couleur jusqu'a 10 couleurs max
 				if (event.getTarget() == bplusAlea && Integer.parseInt(labelAlea.getText()) < 10) {
 
 					labelAlea.setText("" + (Integer.parseInt(labelAlea.getText()) + 1));
 					Alea();
 				}
 
-				//gere l'evenement suppression d'une couleurs jusqu'a 2 couleur mini
+				// gere l'evenement suppression d'une couleurs jusqu'a 2 couleur mini
 				if (event.getTarget() == bmoinsAlea && Integer.parseInt(labelAlea.getText()) > 2) {
 
 					labelAlea.setText("" + (Integer.parseInt(labelAlea.getText()) - 1));
 					Alea();
 				}
 
-				//permet de regenerer aleatoirement les couleurs
+				// permet de regenerer aleatoirement les couleurs
 				if (event.getTarget() == regenerer) {
+
 					regenerate();
 				}
 			}
 		}
 	}
 
-	//regenere les couleurs non validé
+	// regenere les couleurs non validé
 	public void regenerate() {
-		VBox[] box = new VBox[10];
+		root.getChildren().clear();
+		root.getChildren().addAll(hboxChoix);
+
+		labelAlea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		labelAlea.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
+
+		GridPane gridPane = new GridPane();
+		gridPane.setHgap(34);
+		gridPane.setLayoutY(235);
+		gridPane.setLayoutX(26);
+
+		vBoxAlea = new VBox(10);
+		vBoxAlea.setPadding(new Insets(10, 10, 10, 10));
+		hBoxAlea = new HBox(10);
+
+		hBoxAlea.getChildren().addAll(bmoinsAlea, bplusAlea);
+		vBoxAlea.getChildren().addAll(labelAlea, hBoxAlea, regenerer);
+		vBoxAlea.setLayoutX(734);
+		vBoxAlea.setLayoutY(18);
+
+		VBox[] box2 = new VBox[10];
+
+		// 5 pixels space between child nodes
 		int num1 = Integer.parseInt(labelAlea.getText());
 		for (int i = 0; i < Integer.parseInt(labelAlea.getText()); i++) {
-			
-			if(!checkBox[i].isSelected()) {
-				
+
+			if (checkBox[i].isSelected()) {
+
+				box2[i] = new VBox(30);
+				box2[i].getChildren().addAll(checkBox[i], mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
+				gridPane.addColumn(i, box2[i]);
+
+			} else {
+
 				checkBox[i] = new CheckBox("Valider");
-				box[i] = new VBox(30);
-				mod[i] = new ModuleCouleur(((int) (235) / num1) * (i + 1));	
-				box[i].getChildren().addAll(checkBox[i],mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
-				gridPane.setColumnIndex( box[i],i);
+				box2[i] = new VBox(30);
+				mod[i] = new ModuleCouleur(((int) (235) / num1) * (i + 1));
+				box2[i].getChildren().addAll(checkBox[i], mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
+				gridPane.addColumn(i, box2[i]);
+
 			}
 		}
+		root.getChildren().addAll(vBoxAlea, gridPane, exit);
 	}
-	
-	//creer toute les couleurs necessaire a l'affichage du mode aleatoire
+
+
+	public void disable() {
+		
+		
+		dis = false;
+		for(int i = 0; i < checkBox.length; i++) {
+			if (checkBox[i].isSelected()) {
+
+				bplusAlea.setDisable(true);
+				bmoinsAlea.setDisable(true);
+				dis = true;
+			}
+		}
+		
+		if(dis == false) {
+			
+			bplusAlea.setDisable(false);
+			bmoinsAlea.setDisable(false);
+		}
+
+	}
+	// creer toute les couleurs necessaire a l'affichage du mode aleatoire
 	public void Alea() {
 
 		root.getChildren().clear();
@@ -207,23 +260,32 @@ public class EasyPrint2 extends Application {
 		// 5 pixels space between child nodes
 		int num = Integer.parseInt(labelAlea.getText());
 		for (int i = 0; i < Integer.parseInt(labelAlea.getText()); i++) {
-			//if(!mod[i].checkBox.isSelected()) {
-				checkBox[i] = new CheckBox("Valider");
-				box[i] = new VBox(30);
-				mod[i] = new ModuleCouleur(((int) (235) / num) * (i + 1));
-			//}
-			box[i].getChildren().addAll(checkBox[i],mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
+
+			/*//checkBox1 = new CheckBox("Valider");
+			checkBox[i] = checkBox1;
+
+			checkBox[i].setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+
+					disable();
+
+				}
+			});*/
+
+			box[i] = new VBox(30);
+			mod[i] = new ModuleCouleur(((int) (235) / num) * (i + 1));
+			box[i].getChildren().addAll(checkBox[i], mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
 			gridPane.addColumn(i, box[i]);
 		}
 
-		root.getChildren().addAll(vBoxAlea, gridPane,exit);
+		root.getChildren().addAll(vBoxAlea, gridPane, exit);
 	}
 
-	//creer toute les couleurs necessaire a l'affichage du mode utilisateur
+	// creer toute les couleurs necessaire a l'affichage du mode utilisateur
 	public void utilisateur() {
 
 		root.getChildren().clear();
-		root.getChildren().addAll(hboxChoix,exit);
+		root.getChildren().addAll(hboxChoix, exit);
 
 		labelUtil.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		labelUtil.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
@@ -256,9 +318,9 @@ public class EasyPrint2 extends Application {
 				rgb.setFill(color);
 
 				gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
-				text.setText("RGB (" + red + "," + green + "," + blue +")");
-				text2.setText("    " + (int) (color.getRed() * 10) / 10.0 + "   "
-						+ (int) (color.getGreen() * 10) / 10.0 + "   " + (int) (color.getBlue() * 10) / 10.0);
+				text.setText("RGB (" + red + "," + green + "," + blue + ")");
+				text2.setText("    " + (int) (color.getRed() * 10) / 10.0 + "   " + (int) (color.getGreen() * 10) / 10.0
+						+ "   " + (int) (color.getBlue() * 10) / 10.0);
 
 				colorsRgb[currentValue - 1] = color;
 				colorsGrey[currentValue - 1] = grey;
@@ -290,9 +352,9 @@ public class EasyPrint2 extends Application {
 		exit.setTextFill(Color.RED);
 		exit.setFont(Font.font(14));
 
-		for(int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 
-			mod[i] = new ModuleCouleur(110)	;	
+			mod[i] = new ModuleCouleur(110);
 		}
 
 		aleatoire.setOnAction(new EventHandler<ActionEvent>() {
@@ -311,14 +373,24 @@ public class EasyPrint2 extends Application {
 			}
 
 		});
+		
+		for(int i = 0; i < checkBox.length;i++) {
+			checkBox[i] = new CheckBox("Valider");
 
-		exit.setOnAction(e -> Platform.exit()); 
-		root.getChildren().addAll(hboxChoix,exit);
+			checkBox[i].setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+
+					disable();
+
+				}
+			});
+		}
+
+		exit.setOnAction(e -> Platform.exit());
+		root.getChildren().addAll(hboxChoix, exit);
 
 		Scene scene = new Scene(root);
 		scene.setFill(Color.rgb(204, 204, 204));
-
-
 
 		stage.setResizable(false);
 		stage.setScene(scene);
@@ -331,11 +403,7 @@ public class EasyPrint2 extends Application {
 		stage.setWidth(bounds.getWidth());
 		stage.setHeight(bounds.getHeight());
 
-
 		stage.show();
-
-
-
 
 	}
 
