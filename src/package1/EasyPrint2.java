@@ -1,7 +1,6 @@
 package package1;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -12,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,7 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -32,6 +31,8 @@ public class EasyPrint2 extends Application {
 	Button bmoinsAlea = new Button("  -  ");
 	Button bplusAlea = new Button("  +  ");
 	Button exit = new Button("Exit");
+	Button reset = new Button("Reset");
+	Button reset1 = new Button("Reset");
 	Button aleatoire = new Button("Mode Aleatoire");
 	Button utilisateur = new Button("Mode Utilisateur");
 	Button regenerer = new Button(" regenerate ");
@@ -43,15 +44,15 @@ public class EasyPrint2 extends Application {
 	GridPane gridPane = new GridPane();
 	ColorPicker colorPicker = new ColorPicker();
 	Color[] colorsRgb = new Color[10];
-	Text[] texts = new Text[10];
-	Text[] texts2 = new Text[10];
+	TextField[] texts = new TextField[10];
+	TextField[] texts2 = new TextField[10];
 	int[] colorsGrey = new int[10];
 	int currentValue = 0;
 	Rectangle rgb;
 	Rectangle gris;
 	int grey;
-	Text text;
-	Text text2;
+	TextField text;
+	TextField text2;
 	final HBox hboxChoix = new HBox(30);
 	ModuleCouleur[] mod = new ModuleCouleur[10];
 	CheckBox[] checkBox = new CheckBox[10];
@@ -71,13 +72,13 @@ public class EasyPrint2 extends Application {
 					// creer un nouveau module couleur
 					labelUtil.setText("" + (currentValue + 1));
 
-					text = new Text("RGB (" + 255 + "," + 255 + "," + 255 + ")");
-					text.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
-					text.setFill(Color.BLACK);
+					text = new TextField("RGB(" + 255 + "," + 255 + "," + 255 + ")");
+					text.setFont(Font.font(null, FontWeight.SEMI_BOLD, 11));
+					text.setMaxWidth(122);
 
-					text2 = new Text("    " + 1.0 + "   " + 1.0 + "   " + 1.0);
-					text2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 12.5));
-					text2.setFill(Color.BLACK);
+					text2 = new TextField("0xffffffff");
+					text2.setFont(Font.font(null, FontWeight.SEMI_BOLD, 11));
+					text2.setMaxWidth(122);
 
 					VBox vBox = new VBox(30);
 
@@ -103,42 +104,13 @@ public class EasyPrint2 extends Application {
 
 					currentValue++;
 				}
-
+				
+				
 				// gere l'evenement suppression d'une couleur jusqu'a 0 couleur mini
 				if (event.getTarget() == bmoinsUtil) {
-
-					VBox vbox2 = new VBox(30);
-					colorPicker.setMaxWidth(122);
-
-					if (gridPane.getChildren().size() == 1)
-
-						labelUtil.setText("" + (currentValue));
-
-					else {
-
-						rgb = new Rectangle(120, 120, colorsRgb[currentValue - 2]);
-						rgb.setStroke(Color.BLACK);
-						rgb.setStrokeWidth(2);
-
-						gris = new Rectangle(120, 120, new Color(colorsGrey[currentValue - 2] / 255.,
-								colorsGrey[currentValue - 2] / 255., colorsGrey[currentValue - 2] / 255., 1.));
-						gris.setStroke(Color.BLACK);
-						gris.setStrokeWidth(2);
-
-						colorPicker.setValue(colorsRgb[currentValue - 2]);
-						gridPane.getChildren().remove(currentValue - 1);
-						gridPane.getChildren().remove(currentValue - 2);
-
-						vbox2.getChildren().addAll(colorPicker, rgb, gris, texts[currentValue - 2],
-								texts2[currentValue - 2]);
-
-						gridPane.addColumn(currentValue - 2, vbox2);
-
-						labelUtil.setText("" + (currentValue - 1));
-
-						currentValue--;
-					}
+					supprimerCouleurUtil();
 				}
+				
 			} else {// gere les evenements ajouter/enlever une couleur du mode utilisateur
 
 				// gere l'evenement ajout d'une couleur jusqu'a 10 couleurs max
@@ -161,6 +133,40 @@ public class EasyPrint2 extends Application {
 					regenerate();
 				}
 			}
+		}
+	}
+	
+	public void supprimerCouleurUtil() {
+		VBox vbox2 = new VBox(30);
+		colorPicker.setMaxWidth(122);
+
+		if (gridPane.getChildren().size() == 1)
+
+			labelUtil.setText("" + (currentValue));
+
+		else {
+
+			rgb = new Rectangle(120, 120, colorsRgb[currentValue - 2]);
+			rgb.setStroke(Color.BLACK);
+			rgb.setStrokeWidth(2);
+
+			gris = new Rectangle(120, 120, new Color(colorsGrey[currentValue - 2] / 255.,
+					colorsGrey[currentValue - 2] / 255., colorsGrey[currentValue - 2] / 255., 1.));
+			gris.setStroke(Color.BLACK);
+			gris.setStrokeWidth(2);
+
+			colorPicker.setValue(colorsRgb[currentValue - 2]);
+			gridPane.getChildren().remove(currentValue - 1);
+			gridPane.getChildren().remove(currentValue - 2);
+
+			vbox2.getChildren().addAll(colorPicker, rgb, gris, texts[currentValue - 2],
+					texts2[currentValue - 2]);
+
+			gridPane.addColumn(currentValue - 2, vbox2);
+
+			labelUtil.setText("" + (currentValue - 1));
+
+			currentValue--;
 		}
 	}
 
@@ -200,7 +206,7 @@ public class EasyPrint2 extends Application {
 
 			} else {
 
-				checkBox[i] = new CheckBox("Valider");
+				//checkBox[i] = new CheckBox("Valider");
 				box2[i] = new VBox(30);
 				mod[i] = new ModuleCouleur(((int) (235) / num1) * (i + 1));
 				box2[i].getChildren().addAll(checkBox[i], mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
@@ -208,13 +214,13 @@ public class EasyPrint2 extends Application {
 
 			}
 		}
-		root.getChildren().addAll(vBoxAlea, gridPane, exit);
+		root.getChildren().addAll(vBoxAlea, reset, gridPane, exit);
 	}
 
 
 	public void disable() {
-		
-		
+
+
 		dis = false;
 		for(int i = 0; i < checkBox.length; i++) {
 			if (checkBox[i].isSelected()) {
@@ -224,9 +230,9 @@ public class EasyPrint2 extends Application {
 				dis = true;
 			}
 		}
-		
+
 		if(dis == false) {
-			
+
 			bplusAlea.setDisable(false);
 			bmoinsAlea.setDisable(false);
 		}
@@ -261,31 +267,20 @@ public class EasyPrint2 extends Application {
 		int num = Integer.parseInt(labelAlea.getText());
 		for (int i = 0; i < Integer.parseInt(labelAlea.getText()); i++) {
 
-			/*//checkBox1 = new CheckBox("Valider");
-			checkBox[i] = checkBox1;
-
-			checkBox[i].setOnAction(new EventHandler<ActionEvent>() {
-				public void handle(ActionEvent event) {
-
-					disable();
-
-				}
-			});*/
-
 			box[i] = new VBox(30);
 			mod[i] = new ModuleCouleur(((int) (235) / num) * (i + 1));
 			box[i].getChildren().addAll(checkBox[i], mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
 			gridPane.addColumn(i, box[i]);
 		}
 
-		root.getChildren().addAll(vBoxAlea, gridPane, exit);
+		root.getChildren().addAll(vBoxAlea, reset, gridPane, exit);
 	}
 
 	// creer toute les couleurs necessaire a l'affichage du mode utilisateur
 	public void utilisateur() {
-
+		System.out.println("ok");
 		root.getChildren().clear();
-		root.getChildren().addAll(hboxChoix, exit);
+		root.getChildren().addAll(reset1, hboxChoix, exit);
 
 		labelUtil.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		labelUtil.setStyle("-fx-background-color: lightblue;" + " -fx-alignment: center;" + " -fx-font: 30px Verdana;");
@@ -319,8 +314,7 @@ public class EasyPrint2 extends Application {
 
 				gris.setFill(new Color(grey / 255., grey / 255., grey / 255., 1.));
 				text.setText("RGB (" + red + "," + green + "," + blue + ")");
-				text2.setText("    " + (int) (color.getRed() * 10) / 10.0 + "   " + (int) (color.getGreen() * 10) / 10.0
-						+ "   " + (int) (color.getBlue() * 10) / 10.0);
+				text2.setText(""+color);
 
 				colorsRgb[currentValue - 1] = color;
 				colorsGrey[currentValue - 1] = grey;
@@ -352,6 +346,16 @@ public class EasyPrint2 extends Application {
 		exit.setTextFill(Color.RED);
 		exit.setFont(Font.font(14));
 
+		reset.setLayoutX(20);
+		reset.setLayoutY(760);
+		reset.setTextFill(Color.RED);
+		reset.setFont(Font.font(14));
+		
+		reset1.setLayoutX(20);
+		reset1.setLayoutY(760);
+		reset1.setTextFill(Color.RED);
+		reset1.setFont(Font.font(14));
+
 		for (int i = 0; i < 10; i++) {
 
 			mod[i] = new ModuleCouleur(110);
@@ -361,6 +365,8 @@ public class EasyPrint2 extends Application {
 			public void handle(ActionEvent event) {
 
 				Alea();
+				aleatoire.setDisable(true);
+				utilisateur.setDisable(false);
 
 			}
 		});
@@ -368,12 +374,15 @@ public class EasyPrint2 extends Application {
 		utilisateur.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 
+
 				utilisateur();
+				aleatoire.setDisable(false);
+				utilisateur.setDisable(true);
 
 			}
 
 		});
-		
+
 		for(int i = 0; i < checkBox.length;i++) {
 			checkBox[i] = new CheckBox("Valider");
 
@@ -386,7 +395,33 @@ public class EasyPrint2 extends Application {
 			});
 		}
 
-		exit.setOnAction(e -> Platform.exit());
+		exit.setOnAction(e -> System.exit(0));
+		
+		reset.setOnAction(e -> { 	
+			labelAlea.setText("2");
+
+			for(int i = 0; i < checkBox.length;i++) {
+				checkBox[i] = new CheckBox("Valider");
+
+				checkBox[i].setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+
+						disable();
+
+					}
+				});
+			}
+			bmoinsAlea.setDisable(false);
+			bplusAlea.setDisable(false);
+			Alea();
+		});
+		
+		reset1.setOnAction(e -> { 	
+			for(int i = Integer.parseInt(labelUtil.getText()); i > 0; i--) {
+				supprimerCouleurUtil();
+			}
+		});
+		
 		root.getChildren().addAll(hboxChoix, exit);
 
 		Scene scene = new Scene(root);
