@@ -227,6 +227,7 @@ public class EasyPrint2 extends Application {
 
 				bplusAlea.setDisable(true);
 				bmoinsAlea.setDisable(true);
+				
 				dis = true;
 			}
 		}
@@ -235,6 +236,7 @@ public class EasyPrint2 extends Application {
 
 			bplusAlea.setDisable(false);
 			bmoinsAlea.setDisable(false);
+			
 		}
 
 	}
@@ -263,6 +265,9 @@ public class EasyPrint2 extends Application {
 
 		VBox[] box = new VBox[10];
 
+		aleatoire.setDisable(true);
+		utilisateur.setDisable(false);
+		
 		// 5 pixels space between child nodes
 		int num = Integer.parseInt(labelAlea.getText());
 		for (int i = 0; i < Integer.parseInt(labelAlea.getText()); i++) {
@@ -297,7 +302,9 @@ public class EasyPrint2 extends Application {
 		gridPane.setHgap(34);
 		gridPane.setLayoutY(220);
 		gridPane.setLayoutX(26);
-
+		
+		aleatoire.setDisable(false);
+		utilisateur.setDisable(true);
 		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
@@ -365,8 +372,6 @@ public class EasyPrint2 extends Application {
 			public void handle(ActionEvent event) {
 
 				Alea();
-				aleatoire.setDisable(true);
-				utilisateur.setDisable(false);
 
 			}
 		});
@@ -376,8 +381,6 @@ public class EasyPrint2 extends Application {
 
 
 				utilisateur();
-				aleatoire.setDisable(false);
-				utilisateur.setDisable(true);
 
 			}
 
