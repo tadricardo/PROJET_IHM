@@ -283,7 +283,7 @@ public class EasyPrint2 extends Application {
 
 	// creer toute les couleurs necessaire a l'affichage du mode utilisateur
 	public void utilisateur() {
-		System.out.println("ok");
+		
 		root.getChildren().clear();
 		root.getChildren().addAll(reset1, hboxChoix, exit);
 
