@@ -56,7 +56,6 @@ public class EasyPrint2 extends Application {
 	final HBox hboxChoix = new HBox(30);
 	ModuleCouleur[] mod = new ModuleCouleur[10];
 	CheckBox[] checkBox = new CheckBox[10];
-
 	boolean dis = false;
 
 	class ClicListener implements EventHandler<ActionEvent> {
@@ -121,7 +120,7 @@ public class EasyPrint2 extends Application {
 				}
 
 				// gere l'evenement suppression d'une couleurs jusqu'a 2 couleur mini
-				if (event.getTarget() == bmoinsAlea && Integer.parseInt(labelAlea.getText()) > 2) {
+				if (event.getTarget() == bmoinsAlea && Integer.parseInt(labelAlea.getText()) > 1) {
 
 					labelAlea.setText("" + (Integer.parseInt(labelAlea.getText()) - 1));
 					Alea();
@@ -135,6 +134,7 @@ public class EasyPrint2 extends Application {
 			}
 		}
 	}
+	
 	
 	public void supprimerCouleurUtil() {
 		VBox vbox2 = new VBox(30);
@@ -227,7 +227,7 @@ public class EasyPrint2 extends Application {
 
 				bplusAlea.setDisable(true);
 				bmoinsAlea.setDisable(true);
-				
+			
 				dis = true;
 			}
 		}
@@ -273,8 +273,15 @@ public class EasyPrint2 extends Application {
 		for (int i = 0; i < Integer.parseInt(labelAlea.getText()); i++) {
 
 			box[i] = new VBox(30);
-			mod[i] = new ModuleCouleur(((int) (235) / num) * (i + 1));
-			box[i].getChildren().addAll(checkBox[i], mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
+			
+			if(checkBox[i].isSelected()) {
+			
+				box[i].getChildren().addAll(checkBox[i], mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
+			}
+			else {
+				mod[i] = new ModuleCouleur(((int) (235) / num) * (i + 1));
+				box[i].getChildren().addAll(checkBox[i], mod[i].r2, mod[i].r1, mod[i].text, mod[i].text2);
+			}
 			gridPane.addColumn(i, box[i]);
 		}
 
